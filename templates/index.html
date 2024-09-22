@@ -5,4 +5,54 @@
 {% block content %}
     <h1>Welcome to Maria Emege's Art Page</h1>
     <p>Discover unique artworks and stories behind them.</p>
+
+    <!-- Contenedor para el carrusel de imágenes -->
+    <div class="container">
+        <div id="image-carousel" class="row">
+            <!-- Las imágenes se cargarán aquí -->
+        </div>
+    </div>
+
+    <!-- Script para rotar las imágenes cada 4 segundos -->
+    <script>
+        const imageUrls = [
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Batman.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/chica.png',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/City.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/India.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Jordan.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Lebron.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Kobe.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Kyrie.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Manitas.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Niña_tropical.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Spidergwen.jpg',
+            'https://mariaemegeweb.s3.amazonaws.com/photos/Spiderymj.jpg'
+        ];
+
+        // Índice para las imágenes
+        let currentIndex = 0;
+
+        function updateImages() {
+            const carousel = document.getElementById('image-carousel');
+            carousel.innerHTML = '';  // Limpiar el contenido actual
+
+            // Mostrar 3 imágenes al mismo tiempo
+            for (let i = 0; i < 3; i++) {
+                const img = document.createElement('img');
+                img.src = imageUrls[(currentIndex + i) % imageUrls.length];
+                img.classList.add('col-md-4');  // Asegurar que cada imagen ocupe 1/3 del espacio
+                carousel.appendChild(img);
+            }
+
+            currentIndex = (currentIndex + 3) % imageUrls.length;  // Actualizar el índice
+        }
+
+        // Cambiar las imágenes cada 4 segundos
+        setInterval(updateImages, 4000);
+
+        // Inicializar con las primeras imágenes
+        updateImages();
+    </script>
 {% endblock %}
+
