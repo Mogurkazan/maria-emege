@@ -1,0 +1,51 @@
+/* Fondo negro y texto blanco global */
+body {
+    background-color: black;
+    color: white;
+}
+
+/* Asegurar que los enlaces también sean blancos */
+a {
+    color: white;
+}
+
+/* Asegurar que los enlaces cambien de color al pasar el cursor */
+a:hover {
+    color: #cccccc; /* Gris claro al pasar el cursor */
+}
+
+/* Si quieres que los botones también sigan el esquema */
+.btn {
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+.btn:hover {
+    background-color: gray;
+    color: white;
+}
+
+
+/* Estilo para las imágenes en las cards */
+.uniform-image {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+}
+
+/* Efecto hover para mostrar pie de foto */
+.caption-hover {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .caption-hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+}

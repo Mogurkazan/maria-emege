@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category_name }} - Maria Emege{% endblock %}
+
+{% block content %}
+<h1>{{ category_name }}</h1>
+<div class="container">
+    <div class="row">
+        {% for image_url in images %}
+        <div class="col-md-3">
+            <div class="card mb-3 mt-3">
+                <!-- Imagen con lazy loading -->
+                <img data-src="{{ image_url }}" class="card-img-top lazy-load uniform-image " alt="Image for {{ category_name }}">
+
+                <!-- Pie de foto que aparecerá en hover -->
+                <div class="card-footer text-center caption-hover">
+                    <p>Información sobre la imagen</p> <!-- Aquí puedes agregar la información relevante -->
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter0|divisibleby:4 %}
+        </div><div class="row">
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const lazyImages = document.querySelectorAll('img.lazy-load');
+        
+        lazyImages.forEach(img => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        img.src = img.getAttribute('data-src');
+                        img.classList.remove('lazy-load');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            observer.observe(img);
+        });
+    });
+</script>
+{% endblock %}
