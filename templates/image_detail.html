@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Image Detail{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h1>Image Detail</h1>
+    {% if image_url %}
+    <img src="{{ image_url }}" class="img-fluid" alt="Detailed view">
+    {% else %}
+    <p>Image not found.</p>
+    {% endif %}
+</div>
+{% endblock %}

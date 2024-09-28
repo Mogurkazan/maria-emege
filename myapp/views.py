@@ -94,3 +94,14 @@ categories_images = {
 def category_view(request, category_name):
     images = categories_images.get(category_name, [])
     return render(request, 'category.html', {'images': images, 'category_name': category_name})
+
+# Vista para mostrar la imagen individual en detalle
+def image_detail(request, image_name):
+    # Buscar la imagen en el diccionario
+    image_url = None
+    for category, images in categories_images.items():
+        if any(image_name in url for url in images):
+            image_url = f'https://mariaemegeweb.s3.amazonaws.com/photos/{image_name}'
+            break
+    
+    return render(request, 'image_detail.html', {'image_url': image_url})

@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load extras %}
+
 
 {% block title %}{{ category_name }} - Maria Emege{% endblock %}
 
@@ -9,15 +11,15 @@
         {% for image_url in images %}
         <div class="col-md-3">
             <div class="card mb-3 mt-3">
-                <!-- Imagen con lazy loading -->
-                <img data-src="{{ image_url }}" class="card-img-top lazy-load uniform-image " alt="Image for {{ category_name }}">
-
-                <!-- Pie de foto que aparecerá en hover -->
+                <!-- Usar el filtro personalizado -->
+                <a href="{% url 'image_detail' image_url|get_filename_from_url %}">
+                    <img data-src="{{ image_url }}" class="card-img-top lazy-load uniform-image" alt="Image for {{ category_name }}">
+                </a>
                 <div class="card-footer text-center caption-hover">
-                    <p>Información sobre la imagen</p> <!-- Aquí puedes agregar la información relevante -->
+                    <p>Información sobre la imagen</p>
                 </div>
             </div>
-        </div>
+        </div>      
         {% if forloop.counter0|divisibleby:4 %}
         </div><div class="row">
         {% endif %}
