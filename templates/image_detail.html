@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
+{% load extras %}
 
 {% block title %}Image Detail{% endblock %}
 
 {% block content %}
-<div class="container text-center">
-    <h1>Image Detail</h1>
-    {% if image_url %}
-    <img src="{{ image_url }}" class="img-fluid" alt="Detailed view">
-    {% else %}
-    <p>Image not found.</p>
-    {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <img src="{{ image_url }}" class="img-fluid" alt="Image Detail">
+            <div class="text-center mt-3">
+                <a href="{% if user.is_authenticated %}{% url 'add_to_cart' image_url|get_filename_from_url %}{% else %}{% url 'login' %}{% endif %}" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-cart"></i> <!-- Icono de carrito pequeño -->
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 {% endblock %}

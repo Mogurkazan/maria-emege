@@ -14,7 +14,7 @@ a:hover {
     color: #cccccc; /* Gris claro al pasar el cursor */
 }
 
-/* Si quieres que los botones también sigan el esquema */
+/* Estilo general para los botones */
 .btn {
     background-color: white;
     color: black;
@@ -26,26 +26,90 @@ a:hover {
     color: white;
 }
 
+/* Espaciado entre las imágenes en las vistas de categoría */
+.card {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    border: none; /* Elimina los bordes si es necesario */
+    overflow: hidden; /* Asegura que el pie de foto no sobresalga */
+    background-color: transparent; /* Fondo transparente para la card */
+    height: 100%; /* Asegura que la card ocupe todo el espacio de su contenedor */
+}
 
-/* Estilo para las imágenes en las cards */
+/* Estilo para las imágenes dentro de las cards */
 .uniform-image {
     object-fit: cover;
     width: 100%;
-    height: 200px;
+    height: 100%; /* Asegura que la imagen cubra todo el espacio disponible */
+    transition: transform 0.3s ease; /* Añade un efecto de zoom al hacer hover */
 }
 
 /* Efecto hover para mostrar pie de foto */
 .caption-hover {
     opacity: 0;
     transition: opacity 0.3s ease;
-}
-
-.card:hover .caption-hover {
-    opacity: 1;
     background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
     color: white;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     padding: 10px;
+    text-align: center;
+}
+
+/* Mostrar el pie de foto y hacer zoom en la imagen al hacer hover */
+.card:hover .caption-hover {
+    opacity: 1;
+}
+
+.card:hover .uniform-image {
+    transform: scale(1.05); /* Efecto zoom */
+}
+
+/* Ajuste del footer para que el ícono de carrito aparezca bien */
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro para el footer */
+    color: white; /* Texto del footer en blanco */
+    padding: 5px; /* Ajustar el padding según necesidad */
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* Ajusta la altura del footer */
+}
+
+/* Mostrar el footer al hacer hover en la card */
+.card:hover .card-footer {
+    opacity: 1;
+}
+
+/* Estilo específico para el botón con el icono del carrito */
+.btn-outline-light.btn-sm {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+/* Hover para el botón del carrito en la card */
+.btn-outline-light.btn-sm:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Estilo del ícono del carrito */
+.btn-outline-light i.bi-cart {
+    font-size: 16px; /* Tamaño pequeño para el icono */
+}
+
+/* Para el ícono del carrito en la vista individual y en las categorías */
+.btn-outline-light.btn-sm i {
+    font-size: 16px; /* Tamaño del ícono */
 }

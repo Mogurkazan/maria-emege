@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load extras %}
 
-
 {% block title %}{{ category_name }} - Maria Emege{% endblock %}
 
 {% block content %}
@@ -9,17 +8,18 @@
 <div class="container">
     <div class="row">
         {% for image_url in images %}
-        <div class="col-md-3">
-            <div class="card mb-3 mt-3">
-                <!-- Usar el filtro personalizado -->
-                <a href="{% url 'image_detail' image_url|get_filename_from_url %}">
-                    <img data-src="{{ image_url }}" class="card-img-top lazy-load uniform-image" alt="Image for {{ category_name }}">
-                </a>
-                <div class="card-footer text-center caption-hover">
-                    <p>Información sobre la imagen</p>
+            <div class="col-md-3">
+                <div class="card mb-3 mt-3">
+                    <a href="{% url 'image_detail' image_url|get_filename_from_url %}">
+                        <img data-src="{{ image_url }}" class="card-img-top lazy-load uniform-image" alt="Image for {{ category_name }}">
+                    </a>
+                    <div class="card-footer caption-hover">
+                        <a href="{% if user.is_authenticated %}{% url 'add_to_cart' image_url|get_filename_from_url %}{% else %}{% url 'login' %}{% endif %}" class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-cart"></i> <!-- Icono del carrito -->
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </div>      
+            </div>      
         {% if forloop.counter0|divisibleby:4 %}
         </div><div class="row">
         {% endif %}

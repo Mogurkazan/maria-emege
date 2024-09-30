@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def index(request):
     return render(request, 'index.html')
@@ -105,3 +107,18 @@ def image_detail(request, image_name):
             break
     
     return render(request, 'image_detail.html', {'image_url': image_url})
+
+# Añadir al carrito
+@login_required
+def add_to_cart(request, image_name):
+    cart = request.session.get('cart', [])
+    image_url = f'https://mariaemegeweb.s3.amazonaws.com/photos/{image_name}'
+    
+    if image_url not in cart:
+        cart.append(image_url)
+        request.session['cart'] = cart
+        messages.success(request, "Imagen añadida al carrito.")
+    else:
+        messages.info(request, "Esta imagen ya está en tu carrito.")
+    
+    return redirect('image_detail', image_name=image_name)
